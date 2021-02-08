@@ -33,8 +33,8 @@
         <h4>Базовый курс JavaScript</h4>
         1. сдавал через gb+git
         2. сдавал через gb+git
-        3. Циклы, массивы, структуры данных<a href="lessons/3/index.html"> Рабочая версия </a> (<a href="lessons/l1_lesson1/l1_lesson1.rar">Архив с заданием</a>)<br>
-        3. Циклы, массивы, структуры данных<a href="lessons/3/index.html"> Рабочая версия </a> (<a href="lessons/l1_lesson1/l1_lesson1.rar">Архив с заданием</a>)<br>
+        3. Циклы, массивы, структуры данных<a href="lessons/3/index.html"> Рабочая версия </a> <br>
+        4. Циклы, массивы, структуры данных<a href="lessons/4/index.html"> Рабочая версия </a> <br>
 
         <br><br>
     © Все права защищены (не понять  только от кого и зачем)
