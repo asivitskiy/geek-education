@@ -1,6 +1,9 @@
 //полностью переписал игру
 //загадки теперь объекты
 //теперь ветвление выполняется не условиями в коде, а на основании индексов
+//(в каждом вопросе есть массив masIdOfQuestions - это куда какой ответ ведет. соответственно и указать можно неограниченное количество вариантов ответа
+//masIdOfQuestions и masLabelsForQuestions должны совпадать по количеству элементов
+//в консоли в конце игры выводится история ответов (сначала успешных) - массив hist, потом просто история вводов histAll
 
 //Создаем конструктор объекта для сущности ОТВЕТ (обект я считаю тут нужен для упрощения редактирования, чтобы не терять структуру если чего то поменяется)
 function Answer(idd,mainText,masIdOfQuestions,masLabelsForQuestions,endofgamePoint) {
@@ -10,12 +13,19 @@ function Answer(idd,mainText,masIdOfQuestions,masLabelsForQuestions,endofgamePoi
     this.masLabelsForQuestions = masLabelsForQuestions;//masLabelsForQuestions - массив тестов вариантов ответов
     this.endofgamePoint = endofgamePoint;
 }
-
+//конструктор обектов истории для выведения шага по запросу
 function Histr(question,choice,text) {
     this.question = question; //
     this.choice = choice;
     this.text = text;
 }
+
+//массив из объектов-вопросов
+    //idd - уникальный номер
+    //maintext - текст вопроса
+    //masIdOfQuestions - список idd вопросов, к которым ведет соответствующий выбор
+    //masLabelsForQuestions - это собственно тексты ответов (соответствуют по порядку с masIdOfQuestions)
+    //endofgamePoint: если равно 1 - возможен ход дальше. если равно 0 - значит это конечный пункт квеста.
 
 var questions = [];
 questions.push(new Answer(1,'Вы живёте в тихой и уютной деревеньке на окрайне страны.\n' +
@@ -58,46 +68,71 @@ questions.push(new Answer(6,"Вы покололи дров, вернулись,
     ["","",""],
     0));
 
-var globalCurrentQuestion = 0;
-var hist = [];
-
-var histString = "";
-
-var ans=0;
-var currentQuestion = 0;
-
-
+//функция вывода на экран текущего вопроса
+//функция возвращает ans - ввод пользователя
+//                   quest - индекс выведенного объекта
+//                   gamestatus -
 function questionRender(quest) {
-        dataForRender = questions[quest];
-        if (questions[quest].endofgamePoint == 1)
-        {   gamestatus=1;
+    //получаем объект с текущим вопросом (чтобы упростить запись далее в функции)
+    dataForRender = questions[quest];
+
+    //условие прекращения игры если endofgamePoint == 0
+    //если точка конечная - то уже не промт, а алерт выводится
+    if (questions[quest].endofgamePoint == 1)
+    {   gamestatus=1;
+        do {
             ans = prompt(dataForRender.mainText + "\n" + dataForRender.masLabelsForQuestions.join("\n"));
+            histAll.push(ans);
+        } while ((ans <= 0) || (ans >= dataForRender.masIdOfQuestions.length+1) || isNaN(ans)) // проверка на значения не из диапазона
+    }
+    else
+    {   gamestatus=0;
+        alert(dataForRender.mainText + "\n" + dataForRender.masLabelsForQuestions.join("\n"));
 
-        }
-        else
-        {   gamestatus=0;
-            alert(dataForRender.mainText + "\n" + dataForRender.masLabelsForQuestions.join("\n"));
-
-        }
-
+    }
+    //собираем результаты работы функции в k
+    //и да - тут действительно нужна переменная quest,
+    //т.к. следующая функция сменит глобальные переменные, а этот массив будет до конца итерации цикла хранить номер предыдущего вопроса
+    //(а он нужен для вычисления idd (идентификатора вопроса
     k = [ans,quest,gamestatus];
     return k;
 
 }
 
 //получение индекса объекта, который меет id choicedAns
+//функция ищет индекс следующего вопроса на основании выбора пользователя и текущего вопроса
 function searchNextQuestion(choicedAns,curQuest) {
+    //счетчик( используем для перебора объектов и вычисление индекса нужного нам объекта)
     var ii=0;
+    //результат поиска индекса
     var res=0;
+    //перебор массива объектов вопросов
     for (var curObj of questions) {
-        curIdOfObj = ii;
+        //сравниваем idd текущего объекта с idd, который указан в соответствующем выборе (т.е. на первом шаге игры:
+        //пользователь ввел допустим 1. 1 - это первый вариант ответа на вопрос с индексом 0.
+        // Первый Вариант ответа сдержится в masIdOfQuestions с индексом на 1 меньше чем то, что ввел пользователь и содеожит в себе номер idd,
+        // на который является следующим шагом квеста при этом выборе.
         if (curObj.idd == questions[curQuest].masIdOfQuestions[choicedAns-1]) {
+            //запоминаем, где было совпадение (при верном составление массива вопросов - idd будет уникальный)
             res = ii;
         }
+        //ищем дальше
         ii++;
     }
+    //возврат реузальтата
     return res;
 }
+
+//текущий вопрос в игре (0-значит выводится перый вводный вопрос
+var globalCurrentQuestion = 0;
+//массив для обектов истории (успешные действия)
+var hist = [];
+//массив с историей выборов пользователя(в том числе и с неверными)
+var histAll = [];
+//ткущий выбор пользователя
+var ans=0;
+
+
 
 do {
     //приходит массив из двух значений - текущий выбор [0], текущий вопрос[1]
@@ -110,10 +145,13 @@ do {
 
 
 } while (1)
+
+hist.push(new Histr(-1,-1,questions[globalCurrentQuestion].mainText));
+
 console.log(hist);
-/*document.write(histString);*/
 var historyAsk = prompt("Введите номер шага");
 alert(hist[historyAsk-1].text);
+console.log(histAll);
 
 
 
