@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Задание 1</title>
+</head>
+<body>
+    <script>
+        function easyDigitChecker(income) {
+            for (i=2; i<income; i++) {
+                if (income>2) {
+                    if (income % i ==0) {
+                        return true;
+                        break
+                    }
+                }
+                else {return false;}
+
+            }
+        }
+
+        k=1;
+        while (k++ < 100) {
+            if (!easyDigitChecker(k)) {console.log(k)}
+        }
+    </script>
+<h3>В консоли выводятся простые числа от 0 до 100</h3>
+</body>
+</html>
