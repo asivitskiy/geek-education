@@ -1,0 +1,49 @@
+<script>
+    var car = {
+        title: "Audi",
+        price: 1000,
+        isEngineStarted: false,
+        show: function(){
+            console.log(this.title + " стоит "+this.price);
+        }
+    }
+    var car2 = {
+        title: "BMW",
+        price: 2000,
+        isEngineStarted: false
+    }
+    car.show();
+    car2.show = car.show;
+    car2.show();
+    
+    car.color = "white";
+    
+    car.start = startEngine;
+    //car2.start = startEngine;
+    //this - ссылка на оъект, который запускает функцию
+    function startEngine(){
+        if(!this.isEngineStarted){
+            this.isEngineStarted = true;
+            console.log("Автомобиль "+this.title + " запущен!");
+        }
+    }
+    
+    car.stop = function(){
+        if(this.isEngineStarted){
+            this.isEngineStarted = false;
+            console.log("Автомобиль "+this.title + " выключен!");
+        }
+    }
+    
+    car2.start = car.start;
+    car2.stop = car.stop;
+    car.start();
+    car2.start();
+    
+//    delete car2.start;
+    
+    car.stop();
+    car2.stop();
+    car2.start();
+//    console.log(car);
+</script>
