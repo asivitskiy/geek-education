@@ -18,7 +18,7 @@ function Item(countOnStore,priceOfItem,nameOfItem,imgMas) {
 //из примечательного - повешаны по два ивентлистнера на кнопки. один отправляет данные в корзину, другой перерисовывает сумму в корзине
 //писать функцию прямо в кнопке неверно, т.к. корзину охота отрисовывать и их других мест, не используя кнопку
 function drawListOfItems(items,targetBlock) {
-    drawBasket();
+    /*drawBasket();*/
     //перебираем элементы
     for (var itemItem of items) {
         const newBlock = document.createElement("div");
@@ -71,14 +71,15 @@ function drawListOfItems(items,targetBlock) {
 }
 
 function addAndRemoveItems(e) {
-    console.log("target-> " + e.target.id);
-    console.log("action-> " + e.target.dataset.id);
+    //чтобы id кнопки и блока не совпадали - делаем кнопкам в корзине префикс btn на айди, а при азпуске этой функции - обрезаем до чистого id товара
+    var clearId = e.target.id.replace("btn",'');
+
         //ищем индекс объекта, который запустил функцию, в корзине . если нет - функция вернет -1
-        var indexOfCurrentElement = currentBasket.map(poss => poss.idOfItem).indexOf((e.target.id));
+        var indexOfCurrentElement = currentBasket.map(poss => poss.idOfItem).indexOf((clearId));
 
     if (e.target.dataset.id == "add") {
         if (indexOfCurrentElement < 0) {
-            currentBasket.push(new Basket(e.target.id, 1));}
+            currentBasket.push(new Basket(clearId, 1));}
         else {currentBasket[indexOfCurrentElement].countOfItem += 1;}
     }
     if ((indexOfCurrentElement >= 0)&&(e.target.dataset.id == "remove")) {
@@ -104,7 +105,7 @@ function drawBasket() {
             textForBasket += itemElem[indexOfCurrentElement].nameOfItem + " (" + el.countOfItem + " кг) -> ";
             textForBasket += el.countOfItem * itemElem[indexOfCurrentElement].priceOfItem + "руб. ";
             //тут я обленился писать через функцию вставку кнопок в корзине, слушателя повешал на онфокус
-            textForBasket += "<button onfocus='addEventListener(\"click\",addAndRemoveItems);' id=" + el.idOfItem + " data-id='remove'>убрать 1кг</button><br>";
+            textForBasket += "<button onfocus='addEventListener(\"click\",addAndRemoveItems);' id=btn" + el.idOfItem + " data-id='remove'>убрать 1кг</button><br>";
             }
         }
     } else { smm = 0; }
@@ -113,6 +114,7 @@ function drawBasket() {
         smm = "<br> Общая сумма: " + smm + "руб.";
         basketBlock.innerHTML = textForBasket + smm;
 }
+
 
 //листалка галереи
 function gallery(e) {
@@ -160,9 +162,6 @@ function gallery(e) {
     document.getElementById(`${e.target.id}`).querySelector(".itemCard__itemPreview img").src = imgName;
     document.getElementById(`${e.target.id}`).querySelector(".itemCard__itemPreview img").dataset.cur = (currentMasImgIndex);
 
-    console.log(sourceOfClick.dataset.cur);
-
-    /*aaa.getElementsByTagName("img")[0].src = "fh0.jpg";*/
 }
 
 
