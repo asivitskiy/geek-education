@@ -116,9 +116,50 @@ function drawBasket() {
 
 //листалка галереи
 function gallery(e) {
+    //блок-источник клика
     var sourceOfClick = document.getElementById(`${e.target.id}`).querySelector(".itemCard__itemPreview img");
-    document.getElementById(`${e.target.id}`).querySelector(".itemCard__itemPreview img").src = "fh2.jpg";
-    
+    //получаем индекс элемента, который имеет ткущий idOfItem
+    var indexOfItem = itemElem.map(poss => poss.idOfItem).indexOf(parseInt(e.target.id));
+    //получаем массив всех картинок к блоку, который активировал событие
+    var masOfImg = itemElem[indexOfItem].imgMas;
+    //сразу считаем количество картинок в массиве
+    var imgCounter = masOfImg.length;
+    //индекс текущей картинки из массива
+    var currentMasImgIndex = sourceOfClick.dataset.cur;
+    //действие (лево-право)
+    var actionDirection = e.target.dataset.id;
+
+    console.log("исх index-> " + parseInt(currentMasImgIndex));
+/*    if (currentMasImgIndex == imgCounter-1) {
+        if (actionDirection == "right") {
+            currentMasImgIndex = 0;
+        } else {
+            currentMasImgIndex -= 1;
+        }
+
+        if (currentMasImgIndex == 0) {
+            if (actionDirection == "left") {
+                currentMasImgIndex = imgCounter - 1;
+            } else {
+                currentMasImgIndex = currentMasImgIndex*1-1;
+            }
+        }*/
+    if (actionDirection == "right"){
+        currentMasImgIndex =currentMasImgIndex*1+1;}
+    if (actionDirection == "left"){
+        currentMasImgIndex = currentMasImgIndex*1-1;}
+    if (currentMasImgIndex>imgCounter-1) {currentMasImgIndex=0}
+    if (currentMasImgIndex<0) {currentMasImgIndex=imgCounter-1}
+
+
+    console.log("direction-> " + actionDirection);
+    console.log("изм index-> " + parseInt(currentMasImgIndex));
+    //извлекаем требуемую картинку (исходя из id блока и ткущей картинки)
+    imgName = itemElem[indexOfItem].imgMas[parseInt(currentMasImgIndex)];
+    //рисуем нужную картинку в нужном блоке
+    document.getElementById(`${e.target.id}`).querySelector(".itemCard__itemPreview img").src = imgName;
+    document.getElementById(`${e.target.id}`).querySelector(".itemCard__itemPreview img").dataset.cur = (currentMasImgIndex);
+
     console.log(sourceOfClick.dataset.cur);
 
     /*aaa.getElementsByTagName("img")[0].src = "fh0.jpg";*/
