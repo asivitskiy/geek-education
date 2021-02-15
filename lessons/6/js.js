@@ -28,7 +28,7 @@ function drawListOfItems(items,targetBlock) {
         var itemCard__itemPreview = document.createElement("div");
         itemCard__itemPreview.className = "itemCard__itemPreview";
         itemCard__itemPreview.innerHTML += "<button data-id='left' id=" + itemItem.idOfItem + " onfocus='addEventListener(\"click\",gallery);'><<</button>";
-        itemCard__itemPreview.innerHTML +="<img data-cur='0'  id="+itemItem.idOfItem+" src=" +itemItem.imgMas[0] +"  width=150>";
+        itemCard__itemPreview.innerHTML +="<img onclick='largeImage(" + itemItem.idOfItem + ")' data-cur='0' id=img"+itemItem.idOfItem+" src=" +itemItem.imgMas[0] +"  width=150 onerror='onerrorFunc(this)' >";
         itemCard__itemPreview.innerHTML += "<button data-id='right' id=" + itemItem.idOfItem + " onfocus='addEventListener(\"click\",gallery);'>>></button>";
         //название
         var itemCard__itemName = document.createElement("div");
@@ -115,7 +115,24 @@ function drawBasket() {
         basketBlock.innerHTML = textForBasket + smm;
 }
 
+//ошибки
+function onerrorFunc(eleme) {
+    eleme.src = "404.jpg";
+}
 
+function largeImage(idOfImage) {
+    var imgMasCurIndex = document.querySelector("#img"+idOfImage);
+    console.log("индекс в массиве ->" + imgMasCurIndex.src);
+    var indexOfItem = itemElem.map(poss => poss.idOfItem).indexOf(parseInt(idOfImage));
+    console.log(indexOfItem);
+    var blockForLargeImage = document.querySelector(".blockForLargeImage");
+    var largeItemImg = document.createElement("img");
+        largeItemImg.src = imgMasCurIndex.src;
+        largeItemImg.width = 300;
+        blockForLargeImage.innerHTML = "";
+        blockForLargeImage.append(largeItemImg);
+
+}
 //листалка галереи
 function gallery(e) {
     //блок-источник клика
@@ -132,20 +149,7 @@ function gallery(e) {
     var actionDirection = e.target.dataset.id;
 
     console.log("исх index-> " + parseInt(currentMasImgIndex));
-/*    if (currentMasImgIndex == imgCounter-1) {
-        if (actionDirection == "right") {
-            currentMasImgIndex = 0;
-        } else {
-            currentMasImgIndex -= 1;
-        }
 
-        if (currentMasImgIndex == 0) {
-            if (actionDirection == "left") {
-                currentMasImgIndex = imgCounter - 1;
-            } else {
-                currentMasImgIndex = currentMasImgIndex*1-1;
-            }
-        }*/
     if (actionDirection == "right"){
         currentMasImgIndex =currentMasImgIndex*1+1;}
     if (actionDirection == "left"){
@@ -165,10 +169,10 @@ function gallery(e) {
 }
 
 
-//объявляем и наполняем массив объектов товаров и массив объектов корзины
+//объявляем и наполняем массив объектов товаров и массив объектов корзины (коризна пока пустая
 var currentBasket=[];
 var itemElem=[];
-itemElem.push(new Item(5,999,"Морковка",["mork0.jpg","mork1.jpg","mork2.jpg"]));
+itemElem.push(new Item(5,999,"Морковка",["mork0.jpg","mork1.jpg","mork2.jpg","mork22.jpg"]));
 itemElem.push(new Item(5,499,"Картоха",["potat0.jpg","potat1.jpg","potat2.jpg"]));
 itemElem.push(new Item(5,5399,"Фейхоа",["fh0.jpg","fh1.jpg","fh2.jpg"]));
 

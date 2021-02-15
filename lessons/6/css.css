@@ -7,7 +7,6 @@
 
 
 .list-wrapper {
-
     display: inline-block;
     width: 100%;
     height: 600px;
@@ -20,13 +19,10 @@
 }
 
 .list-container {
-
     width: 1000px;
-    height: 600px;
     margin: 0 auto;
     margin-top: 50px;
     display: flex;
-    border: 1px solid black;
     justify-content: space-around;
 }
 
@@ -37,7 +33,6 @@
     justify-content: space-around;
     width: 250px;
     height: 300px;
-    border: 1px solid red;
 }
 
 .itemCard__itemPreview {
@@ -70,5 +65,10 @@
 }
 .try1 {
     padding: 10px;
+}
 
+.blockForLargeImage {
+    width: 300px;
+    display: block;
+    margin: 0 auto;
 }
