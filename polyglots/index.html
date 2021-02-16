@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Полиглотики. Онлайн-заказ продукции</title>
+    <link rel="stylesheet" href="css.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;500;700&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+</head>
+<body onload="recountBasket()">
+    <header class="header-container">
+        <div class="header-logo">
+            <img src="img/header__logo.png" width="100%" alt="header__logo">
+        </div>
+    </header>
+
+    <main class="main-container">
+        <div class="clientcode">
+            <!--<form action="#">
+                <input class="clientcode__inputCode" type="text" placeholder="код учебного центра">
+
+            </form>-->
+
+
+        </div>
+
+        <div class="list">
+            <div class="list__group" id="group-1">
+                Preschool English 2018
+            </div>
+
+
+            <div class="list__item" id="item-2">
+                <div class="list__item-name">
+                    <input type="hidden" name="item_id">
+                    Preschool English SB
+                </div>
+                <div class="list__item-price">
+                    <input type="hidden" name="item_price" value="200">
+                    200 р.
+                </div>
+                <div class="list__item-count">
+                    <button class="checkid" onclick="fff(this,'remove')" disabled>-</button>
+                    <input class="list__item-input" type="text" value="0">
+                    <button class="checkid" onclick="fff(this,'add')">+</button>
+                </div>
+                <div class="list__item-amount">
+                    [ <span>0</span> р. ]
+                </div>
+                <div class="list__item-descr">
+                    Книга учителя
+                </div>
+            </div>
+            <div class="list__item" id="item-3">
+                <div class="list__item-name">
+                    <input type="hidden" name="item_id">
+                    Preschool English SB
+                </div>
+                <div class="list__item-price">
+                    <input type="hidden" name="item_price" value="500">
+                    500 р.
+                </div>
+                <div class="list__item-count">
+                    <button class="checkid" onclick="fff(this,'remove')" disabled>-</button>
+                    <input class="list__item-input" type="text" value="0">
+                    <button class="checkid" onclick="fff(this,'add')">+</button>
+                </div>
+                <div class="list__item-amount">
+                    [ <span>0</span> р. ]
+                </div>
+                <div class="list__item-descr">
+                    Книга учителя
+                </div>
+            </div>
+            <div class="list__item" id="item-3">
+                <div class="list__item-name">
+                    <input type="hidden" name="item_id">
+                    Preschool English SB
+                </div>
+                <div class="list__item-price">
+                    <input type="hidden" name="item_price" value="500">
+                    500 р.
+                </div>
+                <div class="list__item-count">
+                    <button class="checkid" onclick="fff(this,'remove')" disabled>-</button>
+                    <input class="list__item-input" type="text" value="0">
+                    <button class="checkid" onclick="fff(this,'add')">+</button>
+                </div>
+                <div class="list__item-amount">
+                    [ <span>0</span> р. ]
+                </div>
+                <div class="list__item-descr">
+                    Книга учителя
+                </div>
+            </div>
+            <div class="list__item" id="item-3">
+                <div class="list__item-name">
+                    <input type="hidden" name="item_id">
+                    Preschool English SB
+                </div>
+                <div class="list__item-price">
+                    <input type="hidden" name="item_price" value="500">
+                    500 р.
+                </div>
+                <div class="list__item-count">
+                    <button class="checkid" onclick="fff(this,'remove')" disabled>-</button>
+                    <input class="list__item-input" type="text" value="0">
+                    <button class="checkid" onclick="fff(this,'add')">+</button>
+                </div>
+                <div class="list__item-amount">
+                    [ <span>0</span> р. ]
+                </div>
+                <div class="list__item-descr">
+                    Книга учителя
+                </div>
+            </div>
+            <div class="list__item" id="item-3">
+                <div class="list__item-name">
+                    <input type="hidden" name="item_id">
+                    Preschool English SB
+                </div>
+                <div class="list__item-price">
+                    <input type="hidden" name="item_price" value="500">
+                    500 р.
+                </div>
+                <div class="list__item-count">
+                    <button class="checkid" onclick="fff(this,'remove')" disabled>-</button>
+                    <input class="list__item-input" type="text" value="0">
+                    <button class="checkid" onclick="fff(this,'add')">+</button>
+                </div>
+                <div class="list__item-amount">
+                    [ <span>0</span> р. ]
+                </div>
+                <div class="list__item-descr">
+                    Книга учителя
+                </div>
+            </div>
+            <div class="list__item" id="item-3">
+                <div class="list__item-name">
+                    <input type="hidden" name="item_id">
+                    Preschool English SB
+                </div>
+                <div class="list__item-price">
+                    <input type="hidden" name="item_price" value="500">
+                    500 р.
+                </div>
+                <div class="list__item-count">
+                    <button class="checkid" onclick="fff(this,'remove')" disabled>-</button>
+                    <input class="list__item-input" type="text" value="0">
+                    <button class="checkid" onclick="fff(this,'add')">+</button>
+                </div>
+                <div class="list__item-amount">
+                    [ <span>0</span> р. ]
+                </div>
+                <div class="list__item-descr">
+                    Книга учителя
+                </div>
+            </div>
+            <div class="list__item" id="item-3">
+                <div class="list__item-name">
+                    <input type="hidden" name="item_id">
+                    Preschool English SB
+                </div>
+                <div class="list__item-price">
+                    <input type="hidden" name="item_price" value="500">
+                    500 р.
+                </div>
+                <div class="list__item-count">
+                    <button class="checkid" onclick="fff(this,'remove')" disabled>-</button>
+                    <input class="list__item-input" type="text" value="0">
+                    <button class="checkid" onclick="fff(this,'add')">+</button>
+                </div>
+                <div class="list__item-amount">
+                    [ <span>0</span> р. ]
+                </div>
+                <div class="list__item-descr">
+                    Книга учителя
+                </div>
+            </div>
+            <div class="list__item" id="item-3">
+                <div class="list__item-name">
+                    <input type="hidden" name="item_id">
+                    Preschool English SB
+                </div>
+                <div class="list__item-price">
+                    <input type="hidden" name="item_price" value="500">
+                    500 р.
+                </div>
+                <div class="list__item-count">
+                    <button class="checkid" onclick="fff(this,'remove')" disabled>-</button>
+                    <input class="list__item-input" type="text" value="0">
+                    <button class="checkid" onclick="fff(this,'add')">+</button>
+                </div>
+                <div class="list__item-amount">
+                    [ <span>0</span> р. ]
+                </div>
+                <div class="list__item-descr">
+                    Книга учителя
+                </div>
+            </div>
+
+
+        </div>
+
+        <div id= "basket" class="basket">
+            Сумма заказа:
+            <span id="basket-amount"></span> руб.
+        </div>
+    </main>
+
+    <footer>
+        <div>
+
+        </div>
+    </footer>
+
+
+    <script>
+        //отслеживание нажатий +- кнопок и изменение значения внутри инпута (меньше ноля не дает уйти)
+       function fff(e,dir) {
+           if (dir == 'add') {e.parentNode.querySelector("input").value = parseInt(e.parentNode.querySelector("input").value) + 1;}
+           if (dir == 'remove') {e.parentNode.querySelector("input").value = parseInt(e.parentNode.querySelector("input").value) - 1;}
+
+           if (parseInt(e.parentNode.querySelector("input").value) > 0) {
+                e.parentNode.querySelector("button").removeAttribute("disabled");}
+           else {
+                e.parentNode.querySelector("button").setAttribute("disabled","");}
+            //при програмном изменении значения принудительно вызывает слушателя изменений в инпуте
+           recountBasket();
+        }
+
+        //развешивает слушателя на изменение количества на все инпуты
+       for (var mutedButtonEl of document.querySelectorAll(".list__item-input")) {
+           mutedButtonEl.addEventListener("input", recountBasket);
+
+       }
+
+       //слушатель
+       function recountBasket() {
+           var amount = 0;
+            for (var curBlock of document.querySelectorAll(".list__item")) {
+                    var currentSumm = curBlock.querySelector(".list__item-price input").value * curBlock.querySelector(".list__item-count input").value;
+                    curBlock.querySelector(".list__item-amount span").innerHTML = currentSumm;
+
+                    amount += currentSumm;
+            }
+           console.log(amount);
+            document.querySelector("#basket-amount").innerHTML = amount;
+       }
+
+
+
+
+
+
+    </script>
+</body>
+</html>
