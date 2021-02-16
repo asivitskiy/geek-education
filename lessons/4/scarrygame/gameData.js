@@ -31,6 +31,7 @@ var currentQuestionIndex = 0;//индекс первого вопроса
 var currentSumm = 0;//сумма выиграша текущая
 
 while (quitFlag) {
+    console.log(questions);
     //ввод ответа
     var ans = +prompt("Введите -1 чтобы забрать деньги прямо сейчас!\n" + "Текущий выигрыш " + currentSumm + "\nОсталось попыток " +(numberOfAttempts-errorsCounter)+  "\n" +
         questions[currentQuestionIndex].mainText + "\n" +

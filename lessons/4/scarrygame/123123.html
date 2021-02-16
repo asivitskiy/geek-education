@@ -1,0 +1,137 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="./css.css">
+    <script src="js.js" defer></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <div class="desc">
+        сюда вставка доски пойдет
+    </div>
+</div>
+
+<button onclick="drawthedesc()">Показать доску</button>
+<input type="button" onclick="makeDefaultPlaygroundLiterals(defaultposliterals)" value="Заполнение буквами">
+<input type="button" onclick="makeDefaultPlaygroundLiterals(defaultposfigures)" value="Заполнение фигурами">
+<script defer>
+    //начальный размер доски (+2 на рамку)
+    var dWidth = 10;
+    var dHeight = 10;
+    var defaultposliterals = [];
+    var defaultposfigures = [];
+    defaultposliterals.push(["Ладья","Конь","ОФЦР","КРЛЬ","КРЛВА","ОФЦР","Конь","Ладья"]);
+    defaultposliterals.push(["Пшк","Пшк","Пшк","Пшк","Пшк","Пшк","Пшк","Пшк"]);
+
+    defaultposfigures.push(["&#9814;","&#9816;","&#9815;","&#9812;","&#9813;","&#9815;","&#9816;","&#9814;"]);
+    defaultposfigures.push(["&#9823;","&#9823;","&#9823;","&#9823;","&#9823;","&#9823;","&#9823;","&#9823;"]);
+
+    function erasethedesc() {
+        var desc = document.querySelector(".desc");
+        desc.innerHTML = "";
+        var buttonChanger = document.getElementsByTagName("button");
+        buttonChanger[0].outerHTML = "<button onclick='drawthedesc()'>Показать доску</button>";
+    }
+
+    function drawthedesc() {
+
+        var dWidth = 10;
+        var dHeight = 10;
+        var desc = document.querySelector(".desc");
+        desc.innerHTML = "";
+        /*console.log(desc);*/
+        for (var i = 0; i < dHeight; i++) {
+            const row = document.createElement("div");
+            row.className = "desc__tr";
+            desc.append(row);
+            for (var k = 0; k <dWidth; k++) {
+                const cell = document.createElement("div");
+                cell.className = "desc__td";
+
+                //красим доску
+                if (
+                    ((k % 2 == 0 && i % 2 == 0)
+                        ||
+                        (k % 2 !== 0 && i % 2 !== 0))
+                    && (i != 0)&& (k != 0)&& (i < dWidth-1)&& (k < dHeight-1) ){
+                    cell.classList.toggle("desc__td-content--black");
+                }
+                //красим рамку
+                if ((i == 0) || (k == 0) || (i == dWidth-1) || (k == dHeight-1)) {
+                    cell.classList.toggle("desc__td-content--gray");
+                }
+                //вставка ячейки
+                row.append(cell);
+                //создаем внутренний контентный блок, чтобы отцентровать по двум осям
+                const content = document.createElement("div");
+                content.className = "desc__td-content";
+                content.innerText = "";
+                cell.append(content);
+
+
+            }
+        }
+
+        var try1 = document.querySelectorAll(".desc__td");
+        var buttonChanger = document.getElementsByTagName("button");
+        buttonChanger[0].outerHTML = "<button onclick='erasethedesc()'>Стереть доску</button>";
+        borderDraw();
+    }
+
+    function borderDraw() {
+        var borderHorizontal = ["A","B","C","D","E","F","G","H","I","J"];
+        var borderVertical = ["1","2","3","4","5","6","7","8","9","10"];
+
+        var rows = document.querySelectorAll(".desc__tr");
+
+        for (var rowCounter = 0; rowCounter < dHeight; rowCounter++) {
+            colsOfRow = rows[rowCounter].querySelectorAll(".desc__td");
+
+            for (var colCounter = 0; colCounter < dWidth; colCounter++) {
+                /*colsOfRow[colCounter].querySelector(".desc__td-content ").innerText = "ПДР";*/
+                if ((colCounter > 0) && (colCounter < dWidth-1)  && ((rowCounter == dHeight-1) || (rowCounter == 0)))
+                {
+                    colsOfRow[colCounter].querySelector(".desc__td-content ").innerText = borderHorizontal[colCounter-1];
+
+                } else
+                if (((rowCounter > 0) && (rowCounter < dWidth-1) && (colCounter == 0)))
+                {
+                    colsOfRow[colCounter].querySelector(".desc__td-content ").innerText = borderVertical[rowCounter-1];
+                    colsOfRow[dHeight-1].querySelector(".desc__td-content ").innerText = borderVertical[rowCounter-1];
+                }
+            }
+        }
+    }
+
+    /*        function makeDefaultPlaygroundLiterals() {
+                console.log(defaultpos);
+                var rows = document.querySelectorAll(".desc__tr");
+
+                for (var ii = 1; ii < dHeight - 1; ii++) {
+                    rows[1].children[ii].querySelector(".desc__td-content").innerText = defaultpos[0][ii-1];
+                    rows[2].children[ii].querySelector(".desc__td-content").innerText = defaultpos[1][ii-1];
+                    rows[dHeight-3].children[ii].querySelector(".desc__td-content").innerText = "HI";
+                    rows[dHeight-2].children[ii].querySelector(".desc__td-content").innerText = "HI";
+
+                }
+            }*/
+
+    function makeDefaultPlaygroundLiterals(defaultpos) {
+        var rows = document.querySelectorAll(".desc__tr");
+        for (var ii = 1,reverscounter = dWidth-1; ii < dHeight - 1; ii++,reverscounter--) {
+            rows[1].children[ii].querySelector(".desc__td-content").innerHTML = defaultpos[0][ii-1];
+            rows[2].children[ii].querySelector(".desc__td-content").innerHTML = defaultpos[1][ii-1];
+            rows[dHeight-3].children[ii].querySelector(".desc__td-content").innerHTML = defaultpos[1][reverscounter-2];
+            rows[dHeight-2].children[ii].querySelector(".desc__td-content").innerHTML = defaultpos[0][reverscounter-2];
+
+        }
+    }
+
+
+</script>
+</body>
+</html>

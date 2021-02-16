@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+<!--    объект товар (id, цена, остаток)
+    объект картинка (id, маленькая, большая)
+    обект корзина ({[id, количество],[id, количество]})-->
+
+
+</head>
+<body>
+    <div class="list-container">
+
+    </div>
+
+<button onclick="drawBasket()">ывести корзину в консоль</button>
+
+
+
+    <script>
+        //конструктор объектов корзины
+        function Basket(idOfItem,countOfItem) {
+            this.idOfItem = idOfItem;
+            this.countOfItem = countOfItem;
+        }
+
+        //функция вывода карточек товаров
+        function drawListOfItems(items,targetBlock) {
+            //перебираем элементы
+            for (var itemItem of items) {
+                const newButton = document.createElement("button");
+                newButton.className = "buttons";
+                newButton.id = itemItem.idOfItem;
+                newButton.innerText = itemItem.nameOfItem;
+                newButton.onclick = function(e){
+                    currentBasket.push(new Basket(e.target.id,1));}
+                targetBlock.append(newButton);
+
+            }
+        }
+
+        //вывод корзины в консоль
+        /*function basketToConsole(bsk) {
+            console.log(bsk[1]);
+        }*/
+
+        //конструктор объектов товаров
+        //случайны id генерируем - чтобы проверниить универсальность функции, чтобы не путать id  с индексами массива
+
+        function Item(countOnStore,priceOfItem,nameOfItem) {
+            this.idOfItem = parseInt(Math.random()*999);
+            this.countOnStore = countOnStore;
+            this.priceOfItem = priceOfItem;
+            this.nameOfItem = nameOfItem;
+        }
+
+        //объявляем и наполняем массив объектов товаров и массив объектов корзины
+        var currentBasket=[];
+        var itemElem=[];
+        itemElem.push(new Item(5,999,"Морковка"));
+        itemElem.push(new Item(5,499,"Картоха"));
+        itemElem.push(new Item(5,5399,"Фейхоа"));
+
+
+        //выбираем блок, в который будем выводить наши карточки товаров
+        listContainer = document.querySelector(".list-container");
+
+        //выводим карточки
+        drawListOfItems(itemElem,listContainer);
+
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>
