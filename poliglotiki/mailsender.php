@@ -1,4 +1,22 @@
 <?php
+
+$filename = rand(100,200).".csv";
+$list = array(
+    array('aaa', 'bbb', 'ccc', 'dddd'),
+    array('123', '456', '789'),
+    array('"aaa"', '"bbb"')
+);
+
+$fp = fopen($filename, 'w');
+
+foreach ($list as $fields) {
+    fputcsv($fp, $fields);
+}
+
+fclose($fp);
+
+
+
 /*$to = 'test-ktcf5uyk8@srv1.mail-tester.com';
 $subject = '=?utf-8?B?'.base64_encode('Тут тема').'?=';
 $headers .= "From: От кого письмо <from@example.com>\r\n";
@@ -15,9 +33,10 @@ $to          = "$name <$email>";
 $from        = "sivitskiy.pro";
 $subject     = "тема ";
 $mainMessage = "Привет,я сообщение с pdf файлом";
-$fileatt     = "test.pdf"; // Расположение файла
+$fileatt     = "$filename; // Расположение файла
+
 $fileatttype = "application/pdf";
-$fileattname = "newName.pdf"; //Имя, которое вы хотите использовать для отправки, или вы можете использовать то же имя
+$fileattname = "zakaz.csv"; //Имя, которое вы хотите использовать для отправки, или вы можете использовать то же имя
 $headers     = "From: $from";
 
 // Открываем и читаем файл в переменную.
@@ -54,4 +73,6 @@ if(mail($to, $subject, $message, $headers))
 } else {
     echo "При отправке почты произошла ошибка.";
 }
+
+unlink($filename);
 ?>
