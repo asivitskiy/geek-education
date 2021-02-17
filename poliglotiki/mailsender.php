@@ -1,11 +1,10 @@
 <?php
 
 $filename = rand(100,200).".csv";
-$list = array(
-    array('очень длинная строка на русском языке', 'bbb', 'ccc', 'dddd'),
-    array('123', '456', '789'),
-    array('"aaa"', '"bbb"')
-);
+$list[] = array('очень длинная строка на русском языке', 'bbb', 'ccc', 'dddd');
+$list[] = array('очень длинная строка на русском языке', 'bbb', 'ccc', 'dddd');
+$list[] = array('очень длинная строка на русском языке', 'bbb', 'ccc', 'dddd');
+$list[] = array('очень длинная строка на русском языке', 'bbb', 'ccc', 'dddd');
 
 $fp = fopen($filename, 'w');
 
