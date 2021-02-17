@@ -33,7 +33,7 @@ $to          = "$name <$email>";
 $from        = "sivitskiy.pro";
 $subject     = "тема ";
 $mainMessage = "Привет,я сообщение с pdf файлом";
-$fileatt     = "$filename; // Расположение файла
+$fileatt     = $filename; // Расположение файла
 
 $fileatttype = "application/pdf";
 $fileattname = "zakaz.csv"; //Имя, которое вы хотите использовать для отправки, или вы можете использовать то же имя
