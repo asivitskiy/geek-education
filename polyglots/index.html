@@ -151,7 +151,7 @@
                     1490 р.
                 </div>
                 <div class="list__item-count">
-                    <button class="checkid" onclick="fff(this,'remove')" disabled>-</button>
+                    <button class="checkid" onclick="fff(this,'remove')" style="color: gray!important;">-</button>
                     <input class="list__item-input" type="text" value="0">
                     <button class="checkid" onclick="fff(this,'add')">+</button>
                 </div>
@@ -193,9 +193,9 @@
                     1440 р.
                 </div>
                 <div class="list__item-count">
-                    <button class="checkid" onclick="fff(this,'remove')" disabled>-</button>
+                    <div class="checkid" onclick="fff(this,'remove')" style="color: darkgray">-</div>
                     <input class="list__item-input" type="text" value="0">
-                    <button class="checkid" onclick="fff(this,'add')">+</button>
+                    <div class="checkid" onclick="fff(this,'add')">+</div>
                 </div>
                 <div class="list__item-amount">
                     [ <span>0</span> р. ]
@@ -230,9 +230,11 @@
            if (dir == 'remove') {e.parentNode.querySelector("input").value = parseInt(e.parentNode.querySelector("input").value) - 1;}
 
            if (parseInt(e.parentNode.querySelector("input").value) > 0) {
-                e.parentNode.querySelector("button").removeAttribute("disabled");}
+               e.parentNode.querySelector("div").style.pointerEvents = "";
+               e.parentNode.querySelector("div").style.color = "black";}
            else {
-                e.parentNode.querySelector("button").setAttribute("disabled","");}
+                e.parentNode.querySelector("div").style.pointerEvents = "none";
+                e.parentNode.querySelector("div").style.color = "darkgray";}
             //при програмном изменении значения принудительно вызывает слушателя изменений в инпуте
            recountBasket();
         }
