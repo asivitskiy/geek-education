@@ -5,6 +5,10 @@
     font-family: 'Raleway', sans-serif;
 }
 
+.list__item * {
+    white-space: nowrap;
+}
+
 .header-container {
     width: 100%;
     display: flex;
@@ -85,7 +89,6 @@
 }
 
 .list__item-count button {
-    font-size: 35px;
     padding: 5px;
     height: 26px;
     line-height: 15px;
@@ -99,8 +102,7 @@
 }
 
 .list__item-name {
-    width: 400px;
-    text-wrap: none;
+    width: 300px;
     overflow: hidden;
 }
 
@@ -113,6 +115,8 @@
 }
 
 .list__item-amount {
+    text-align: right;
+    margin-right: 10px;
     width: 100px;
 }
 
@@ -122,5 +126,6 @@
 }
 
 .list__item-descr {
+    display: none;
     width: 250px;
 }
