@@ -55,7 +55,7 @@
 }
 
 .list__item {
-    width: 800px;
+   /* width: 800px;*/
     display: flex;
     align-items: center;
     flex-direction: row;
@@ -99,7 +99,7 @@
 }
 
 .list__item-name {
-    width: 50%;
+    width: 400px;
     text-wrap: none;
     overflow: hidden;
 }
@@ -119,4 +119,8 @@
 .basket {
     margin: 0 auto;
     margin-top: 30px;
+}
+
+.list__item-descr {
+    width: 250px;
 }
