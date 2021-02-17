@@ -11,7 +11,7 @@ header('Content-Type: application/x-unknown');
 $val = "Очень длинная длинная строка";
 echo "
 <table border=1>
-    <tr><td>".htmlentities(iconv("utf-8", "windows-1251", $val),ENT_QUOTES, "cp1251")." 
+    <tr><td bgcolor='gray'>".htmlentities(iconv("utf-8", "windows-1251", $val),ENT_QUOTES, "cp1251")." 
         </td></tr>
 </table>";
 ?>
