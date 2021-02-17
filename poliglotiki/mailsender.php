@@ -2,7 +2,7 @@
 
 $filename = rand(100,200).".csv";
 $list = array(
-    array('aaa', 'bbb', 'ccc', 'dddd'),
+    array('очень длинная строка на русском языке', 'bbb', 'ccc', 'dddd'),
     array('123', '456', '789'),
     array('"aaa"', '"bbb"')
 );
