@@ -11,7 +11,7 @@ $dompdf = new DOMPDF();
 ENDHTML;*/
 $order_number = $_GET['order_number'].'';
 
-$page = "http://ya.ru";
+$page = "https://sivitskiy.pro";
 /*echo $page;*/
 /*echo $page;*/
 $content = file_get_contents($page);
